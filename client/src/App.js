@@ -1,14 +1,18 @@
+import { QueryClient, QueryClientProvider } from "react-query";
+import Playlist from "./components/Playlist";
+import ReactPlayer from "react-player";
+import { PlayingContext } from "./contexts/PlayingContext";
+import { useContext } from "react";
+
+const queryClient = new QueryClient();
+
 export default function App() {
+  const { playing } = useContext(PlayingContext);
+
   return (
-    <div>
-      <header>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <ReactPlayer url={playing} controls />
+      <Playlist />
+    </QueryClientProvider>
   );
 }
