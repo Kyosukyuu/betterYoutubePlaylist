@@ -10,9 +10,9 @@ export default function PlaylistItem({ vid }) {
     setPlaying(`https://www.youtube.com/watch?v=${vid.contentDetails.videoId}`);
 
   return (
-    <Box onClick={playVideo}>
+    <Box onClick={playVideo} boxShadow="md" p={3}>
       <Image src={vid.snippet.thumbnails.medium.url} w="100%" />
-      <Heading>{vid.snippet.videoOwnerChannelTitle}</Heading>
+      <Heading size="md">{vid.snippet.title}</Heading>
     </Box>
   );
 }

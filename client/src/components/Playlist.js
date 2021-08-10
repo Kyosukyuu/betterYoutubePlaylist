@@ -13,12 +13,16 @@ const fetchData = async () => {
 export default function Playlist() {
   const { data, status } = useQuery("playlist", fetchData);
 
-  // console.log(data);
-  console.log(status);
+  console.log(data);
+  // console.log(status);
 
   return (
     <Center mx={10} my={10}>
-      <Box as="article" sx={{ columnCount: 6, gap: "30px" }} w="100%">
+      <Box
+        as="article"
+        sx={{ columnCount: [1, 1, 4, 6], gap: "30px" }}
+        w="100%"
+      >
         {data &&
           data.items.map((vid) => (
             <PlaylistItem key={vid.contentDetails.videoId} vid={vid} />

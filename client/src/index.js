@@ -4,12 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { PlayingContextProvider } from "./contexts/PlayingContext";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import theme from "./theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <PlayingContextProvider>
-      <App />
-    </PlayingContextProvider>
+    <ChakraProvider theme={theme}>
+      <PlayingContextProvider>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <App />
+      </PlayingContextProvider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
