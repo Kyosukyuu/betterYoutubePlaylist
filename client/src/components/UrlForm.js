@@ -24,8 +24,10 @@ export default function UrlForm() {
   };
 
   // STYLES
-  const bg = useColorModeValue("blue.100", "gray.600");
+  const bg = useColorModeValue("white", "gray.600");
   const inputColor = useColorModeValue("black", "black");
+  const inputBg = useColorModeValue("gray.50", "gray.50");
+  const labelHelper = useColorModeValue("gray.600", "gray.200");
 
   return (
     <Center>
@@ -36,7 +38,7 @@ export default function UrlForm() {
         p={4}
         mx={4}
         rounded="sm"
-        boxShadow="md"
+        boxShadow="lg"
         bg={bg}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -46,7 +48,7 @@ export default function UrlForm() {
             <Input
               type="text"
               name="url"
-              bg="white"
+              bg={inputBg}
               color={inputColor}
               placeholder="URL or playlist ID"
               _placeholder={{ color: "gray.400" }}
@@ -56,7 +58,7 @@ export default function UrlForm() {
             <Flex ml={10}>
               <Button
                 mx={1}
-                colorScheme="linkedin"
+                colorScheme="facebook"
                 aira-label="Search Playlist"
                 type="submit"
               >
@@ -67,13 +69,14 @@ export default function UrlForm() {
                 colorScheme="red"
                 type="reset"
                 aira-label="Clear Fields"
+                variant="outline"
               >
                 Reset
               </Button>
             </Flex>
           </Flex>
 
-          <FormHelperText>
+          <FormHelperText color={labelHelper}>
             Enter a playlist in search bar to begin
           </FormHelperText>
         </FormControl>
