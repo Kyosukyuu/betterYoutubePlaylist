@@ -1,6 +1,8 @@
-import { Box, Center } from "@chakra-ui/react";
+import { Box, Center, Grid } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import PlaylistItem from "./PlaylistItem";
+import { useContext } from "react";
+import { PlayingContext } from "../contexts/PlayingContext";
 
 const fetchData = async () => {
   const { REACT_APP_API_KEY } = process.env;
@@ -11,9 +13,9 @@ const fetchData = async () => {
 };
 
 export default function Playlist() {
-  const { data, status } = useQuery("playlist", fetchData);
-
-  console.log(data);
+  // const { data, status } = useQuery("playlist", fetchData);
+  const { videos } = useContext(PlayingContext);
+  // console.log(data);
   // console.log(status);
 
   return (
@@ -23,8 +25,8 @@ export default function Playlist() {
         sx={{ columnCount: [1, 1, 4, 6], gap: "30px" }}
         w="100%"
       >
-        {data &&
-          data.items.map((vid) => (
+        {videos &&
+          videos.items.map((vid) => (
             <PlaylistItem key={vid.contentDetails.videoId} vid={vid} />
           ))}
       </Box>
