@@ -1,4 +1,4 @@
-import { Center, Box } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { PlayingContext } from "../contexts/PlayingContext";
 import { useContext } from "react";
 import Youtube from "react-youtube";

@@ -8,11 +8,7 @@ export default function PlaylistItem({ vid }) {
   // console.log(vid);
 
   const playVideo = () => {
-    // setPlaying(`https://www.youtube.com/watch?v=${vid.contentDetails.videoId}`);
-    // setPlaying(
-    //   `https://www.youtube.com/embed/${vid.contentDetails.videoId}?autoplay=1`
-    // );
-    setPlaying(`${vid.contentDetails.videoId}`);
+    setPlaying(vid.contentDetails.videoId);
   };
 
   // STYLES
