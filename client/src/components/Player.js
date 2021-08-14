@@ -24,8 +24,7 @@ export default function Player() {
       setPlaying({ id: nextVid.contentDetails.videoId, pos: playing.pos + 1 });
   };
   return (
-    <Center m={5}>
-      {/* <Box as={Youtube} videoId={playing} opts={opts} onEnd={_onEnd} /> */}
+    <Center m={5} boxShadow="md">
       <Skeleton
         isLoaded={status === "success" && playing.id ? true : false}
         width="100%"

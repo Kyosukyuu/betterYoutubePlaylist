@@ -2,7 +2,7 @@ import Playlist from "./components/Playlist";
 import { PlayingContextProvider } from "./contexts/PlayingContext";
 import SelectedMusic from "./components/SelectedMusic";
 import Header from "./components/Header";
-import { Divider, Box, Container } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 
 export default function App() {
   return (

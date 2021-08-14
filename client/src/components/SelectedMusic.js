@@ -1,7 +1,7 @@
 import { PlayingContext } from "../contexts/PlayingContext";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useContext, useEffect, useState } from "react";
-import { Box, Heading, Text, Flex, VStack } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, VStack, Button } from "@chakra-ui/react";
 import Player from "./Player";
 
 export default function SelectedMusic() {
@@ -21,6 +21,8 @@ export default function SelectedMusic() {
   // STYLES
   const bg = useColorModeValue("white", "gray.700");
 
+  const playNow = () => {};
+
   return (
     <Box boxShadow="md" bg={bg} mt={6} rounded="sm">
       <Flex
@@ -39,18 +41,21 @@ export default function SelectedMusic() {
                 Created by {currentlyPlaying.snippet.videoOwnerChannelTitle}
               </Text>
             </Flex>
-            <Text></Text>
           </VStack>
         )}
         {!currentlyPlaying && (
           <VStack>
-            <Flex as="header" flexDirection="column" p={4}>
+            <Flex as="header" flexDirection="column" alignItems="start" p={4}>
               <Heading size="2xl" mb={2}>
                 No music playing
               </Heading>
               <Text>Enter a playlist to begin</Text>
+              {playing.pos === -1 && allVideos && allVideos.items && (
+                <Button colorScheme="green" onClick={playNow} mt={2}>
+                  Play Now!
+                </Button>
+              )}
             </Flex>
-            <Text></Text>
           </VStack>
         )}
       </Flex>

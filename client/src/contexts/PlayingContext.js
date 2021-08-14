@@ -8,9 +8,10 @@ const PlayingContextProvider = ({ children }) => {
   const [playing, setPlaying] = useState({ id: "", pos: -1 });
   const [playList, setPlayList] = useState([]);
   const [allVideos, setAllVideos] = useState([]);
+  const [playlistID, setPlaylistID] = useState("");
 
   const { data, status } = useQuery(
-    ["playlist", { nextPageToken: "" }],
+    ["playlist", { nextPageToken: "", playlistID }],
     fetchData,
     {
       refetchOnWindowFocus: false,
@@ -33,6 +34,8 @@ const PlayingContextProvider = ({ children }) => {
         status,
         allVideos,
         setAllVideos,
+        playlistID,
+        setPlaylistID,
       }}
     >
       {children}

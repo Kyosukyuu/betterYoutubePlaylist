@@ -12,20 +12,35 @@ import {
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useForm } from "react-hook-form";
 import { MdSearch, MdCancel } from "react-icons/md";
+import { useContext } from "react";
+import { PlayingContext } from "../contexts/PlayingContext";
 
 export default function UrlForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const { setPlaylistID } = useContext(PlayingContext);
 
   const onSubmit = (data) => {
-    console.log(data);
+    setPlaylistID(parseURL(data.url));
+  };
+
+  const parseURL = (input) => {
+    const baseURL = "https://www.youtube.com/playlist?list=";
+    if (input.includes(baseURL)) return input.split(baseURL)[1];
+    return input;
+  };
+
+  const onReset = () => {
+    reset();
+    setPlaylistID("");
   };
 
   // STYLES
-  const bg = useColorModeValue("gray.50", "");
+  const bg = useColorModeValue("gray.50", "transparent");
   const inputColor = useColorModeValue("black", "black");
   const inputBg = useColorModeValue("white", "gray.50");
   const labelHelper = useColorModeValue("gray.600", "gray.200");
@@ -79,6 +94,7 @@ export default function UrlForm() {
                 aira-label="Clear Fields"
                 variant="solid"
                 title="Reset"
+                onClick={onReset}
               />
             </Flex>
           </Flex>

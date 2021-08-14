@@ -34,15 +34,12 @@ export default function PlaylistItem({ vid, index }) {
       bg={bg}
       color={playing.id === vid.contentDetails.videoId && selectedColor}
       fontWeight={playing.id === vid.contentDetails.videoId && "bold"}
+      verticalAlign="top"
     >
-      <Td fontStyle="italic" verticalAlign="top">
-        {index}.
-      </Td>
-      <Td verticalAlign="top">{vid.snippet.title}</Td>
-      <Td verticalAlign="top">{vid.snippet.videoOwnerChannelTitle}</Td>
-      <Td verticalAlign="top" isNumeric>
-        {convertedDate}
-      </Td>
+      <Td fontStyle="italic">{index}.</Td>
+      <Td>{vid.snippet.title}</Td>
+      <Td>{vid.snippet.videoOwnerChannelTitle}</Td>
+      <Td isNumeric>{convertedDate}</Td>
     </Tr>
   );
 }

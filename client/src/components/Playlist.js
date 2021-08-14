@@ -14,7 +14,7 @@ import { AnimateSharedLayout } from "framer-motion";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
 export default function Playlist() {
-  const { status, allVideos, setAllVideos } = useContext(PlayingContext);
+  const { status, allVideos } = useContext(PlayingContext);
 
   // STYLES
   const bg = useColorModeValue("white", "gray.700");
@@ -26,12 +26,13 @@ export default function Playlist() {
           <Table
             variant="simple"
             bg={bg}
-            p={3}
+            px={3}
+            py={2}
             size={["sm", "lg"]}
-            sx={{ borderCollapse: "separate", borderSpacing: "10px 5px" }}
+            sx={{ borderCollapse: "separate", borderSpacing: "10px 15px" }}
           >
             <Thead>
-              <Tr>
+              <Tr verticalAlign="top">
                 <Th fontStyle="italic">#</Th>
                 <Th>TITLE</Th>
                 <Th>CHANNEL</Th>
