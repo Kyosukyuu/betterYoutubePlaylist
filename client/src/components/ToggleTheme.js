@@ -6,7 +6,7 @@ export default function ToggleTheme() {
   const { colorMode, toggleColorMode } = useColorMode();
   const toggleThemeMode = () => toggleColorMode();
 
-  const bg = useColorModeValue("white", "gray.600");
+  const bg = useColorModeValue("gray.200", "gray.600");
 
   return (
     <IconButton
@@ -21,6 +21,7 @@ export default function ToggleTheme() {
       variant="solid"
       onClick={toggleThemeMode}
       bg={bg}
+      ml={4}
     >
       Toggle
     </IconButton>

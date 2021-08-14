@@ -1,16 +1,19 @@
 import Playlist from "./components/Playlist";
-import UrlForm from "./components/UrlForm";
-import ToggleTheme from "./components/ToggleTheme";
-import Player from "./components/Player";
 import { PlayingContextProvider } from "./contexts/PlayingContext";
+import SelectedMusic from "./components/SelectedMusic";
+import Header from "./components/Header";
+import { Divider, Box, Container } from "@chakra-ui/react";
 
 export default function App() {
   return (
     <PlayingContextProvider>
-      <ToggleTheme />
-      <UrlForm />
-      <Player />
-      <Playlist />
+      <Box as="main" my={8}>
+        <Container maxW="96em">
+          <Header />
+          <SelectedMusic />
+          <Playlist />
+        </Container>
+      </Box>
     </PlayingContextProvider>
   );
 }

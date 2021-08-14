@@ -1,26 +1,39 @@
 import { createContext, useState } from "react";
 import { useQuery } from "react-query";
+import fetchData from "../helpers/fetchData";
 
 const PlayingContext = createContext();
 
-const fetchData = async () => {
-  const { REACT_APP_API_KEY } = process.env;
-  const res = await fetch(
-    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2C%20id%2C%20snippet%2C%20status&maxResults=1000&playlistId=PLwtwwDbdYBn5N0ZpTTc0BrTvqe1Jxj0rs&key=${REACT_APP_API_KEY}`
-  );
-  return res.json();
-};
-
 const PlayingContextProvider = ({ children }) => {
-  const [playing, setPlaying] = useState("");
-  const [playList, setPlayList] = useState({});
+  const [playing, setPlaying] = useState({ id: "", pos: -1 });
+  const [playList, setPlayList] = useState([]);
+  const [allVideos, setAllVideos] = useState([]);
 
-  const { data: videos, status } = useQuery("playlist", fetchData);
-  console.log(videos);
+  const { data, status } = useQuery(
+    ["playlist", { nextPageToken: "" }],
+    fetchData,
+    {
+      refetchOnWindowFocus: false,
+      enabled: true,
+      onSuccess: (res) => {
+        setAllVideos(res);
+      },
+    }
+  );
+
+  console.log(data);
 
   return (
     <PlayingContext.Provider
-      value={{ playing, setPlaying, playList, setPlayList, videos }}
+      value={{
+        playing,
+        setPlaying,
+        playList,
+        setPlayList,
+        status,
+        allVideos,
+        setAllVideos,
+      }}
     >
       {children}
     </PlayingContext.Provider>

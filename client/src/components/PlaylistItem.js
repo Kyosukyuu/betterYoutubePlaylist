@@ -1,23 +1,48 @@
-import { Box, Image, Heading } from "@chakra-ui/react";
+import { Tr, Td } from "@chakra-ui/react";
 import { PlayingContext } from "../contexts/PlayingContext";
 import { useContext } from "react";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 
-export default function PlaylistItem({ vid }) {
+export default function PlaylistItem({ vid, index }) {
   const { playing, setPlaying } = useContext(PlayingContext);
-  // console.log(vid);
 
   const playVideo = () => {
-    setPlaying(vid.contentDetails.videoId);
+    setPlaying(() => ({
+      id: vid.contentDetails.videoId,
+      pos: index,
+    }));
   };
 
+  const isoDate = new Date(vid.contentDetails.videoPublishedAt);
+  const convertedDate =
+    isoDate.getMonth() +
+    1 +
+    "/" +
+    isoDate.getDate() +
+    "/" +
+    isoDate.getFullYear();
+
   // STYLES
-  const bg = useColorModeValue("white", "gray.600");
+  const bg = useColorModeValue("white", "gray.700");
+  const selectedColor = useColorModeValue("purple.700", "purple.200");
 
   return (
-    <Box onClick={playVideo} boxShadow="lg" p={3} bg={bg} m={3}>
-      <Image src={vid.snippet.thumbnails.medium.url} w="100%" />
-      <Heading size="md">{vid.snippet.title}</Heading>
-    </Box>
+    <Tr
+      onClick={playVideo}
+      p={3}
+      cursor="pointer"
+      bg={bg}
+      color={playing.id === vid.contentDetails.videoId && selectedColor}
+      fontWeight={playing.id === vid.contentDetails.videoId && "bold"}
+    >
+      <Td fontStyle="italic" verticalAlign="top">
+        {index}.
+      </Td>
+      <Td verticalAlign="top">{vid.snippet.title}</Td>
+      <Td verticalAlign="top">{vid.snippet.videoOwnerChannelTitle}</Td>
+      <Td verticalAlign="top" isNumeric>
+        {convertedDate}
+      </Td>
+    </Tr>
   );
 }
