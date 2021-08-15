@@ -8,8 +8,8 @@ import {
   Center,
   Box,
   IconButton,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useForm } from "react-hook-form";
 import { MdSearch, MdCancel, MdContentPaste } from "react-icons/md";
 import { useContext, useRef } from "react";

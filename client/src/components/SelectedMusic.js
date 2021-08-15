@@ -1,5 +1,4 @@
 import { PlayingContext } from "../contexts/PlayingContext";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useContext, useEffect, useState } from "react";
 import {
   Box,
@@ -9,6 +8,7 @@ import {
   VStack,
   Button,
   Icon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { MdPlayCircleFilled } from "react-icons/md";
 import Player from "./Player";
@@ -42,38 +42,32 @@ export default function SelectedMusic() {
         as="section"
       >
         <Player />
-        {currentlyPlaying && (
-          <VStack>
-            <Flex as="header" flexDirection="column" p={4}>
-              <Heading size="2xl" mb={2}>
-                {currentlyPlaying.snippet.title}
-              </Heading>
-              <Text>
-                Created by {currentlyPlaying.snippet.videoOwnerChannelTitle}
-              </Text>
-            </Flex>
-          </VStack>
-        )}
-        {!currentlyPlaying && (
-          <VStack>
-            <Flex as="header" flexDirection="column" alignItems="start" p={4}>
-              <Heading size="2xl" mb={2}>
-                No music playing
-              </Heading>
-              <Text>Enter a playlist to begin</Text>
-              {playing.pos === -1 && allVideos && allVideos.items && (
-                <Button
-                  colorScheme="green"
-                  onClick={playNow}
-                  mt={4}
-                  leftIcon={<Icon as={MdPlayCircleFilled} fontSize={24} />}
-                >
-                  Play Now!
-                </Button>
-              )}
-            </Flex>
-          </VStack>
-        )}
+        <VStack>
+          <Flex as="header" flexDirection="column" alignItems="start" p={4}>
+            <Heading size="2xl" mb={2}>
+              {currentlyPlaying
+                ? currentlyPlaying.snippet.title
+                : "No music playing"}
+            </Heading>
+            <Text>
+              {currentlyPlaying
+                ? `Created by ${currentlyPlaying.snippet.videoOwnerChannelTitle}`
+                : "Enter a playlist to begin"}
+            </Text>
+            {playing.pos === -1 && allVideos && allVideos.items && (
+              <Button
+                colorScheme="green"
+                onClick={playNow}
+                mt={4}
+                leftIcon={<Icon as={MdPlayCircleFilled} fontSize={24} />}
+                aria-label="Play Music Now"
+                title="Play Music Now"
+              >
+                Play Now!
+              </Button>
+            )}
+          </Flex>
+        </VStack>
       </Flex>
       <ActionsBar />
     </Box>

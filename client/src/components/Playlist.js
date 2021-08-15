@@ -6,12 +6,12 @@ import {
   Tr,
   Th,
   Skeleton,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import PlaylistItem from "./PlaylistItem";
 import { useContext } from "react";
 import { PlayingContext } from "../contexts/PlayingContext";
 import { AnimateSharedLayout } from "framer-motion";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 
 export default function Playlist() {
   const { status, allVideos } = useContext(PlayingContext);

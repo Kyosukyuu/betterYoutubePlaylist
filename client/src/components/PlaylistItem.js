@@ -1,7 +1,6 @@
-import { Tr, Td } from "@chakra-ui/react";
+import { Tr, Td, useColorModeValue } from "@chakra-ui/react";
 import { PlayingContext } from "../contexts/PlayingContext";
 import { useContext } from "react";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 
 export default function PlaylistItem({ vid, index }) {
   const { playing, setPlaying } = useContext(PlayingContext);

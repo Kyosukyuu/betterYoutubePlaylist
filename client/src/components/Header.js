@@ -1,7 +1,6 @@
 import ToggleTheme from "./ToggleTheme";
 import UrlForm from "./UrlForm";
-import { Center } from "@chakra-ui/layout";
-import { useColorModeValue } from "@chakra-ui/color-mode";
+import { Center, useColorModeValue } from "@chakra-ui/react";
 
 export default function Header() {
   const bg = useColorModeValue("white", "gray.700");
