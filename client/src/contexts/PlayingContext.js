@@ -6,9 +6,13 @@ const PlayingContext = createContext();
 
 const PlayingContextProvider = ({ children }) => {
   const [playing, setPlaying] = useState({ id: "", pos: -1 });
-  const [playList, setPlayList] = useState([]);
   const [allVideos, setAllVideos] = useState([]);
   const [playlistID, setPlaylistID] = useState("");
+  const [playOptions, setPlayOptions] = useState({
+    repeat: false,
+    shuffle: false,
+    reverse: false,
+  });
 
   const { data, status } = useQuery(
     ["playlist", { nextPageToken: "", playlistID }],
@@ -22,20 +26,20 @@ const PlayingContextProvider = ({ children }) => {
     }
   );
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <PlayingContext.Provider
       value={{
         playing,
         setPlaying,
-        playList,
-        setPlayList,
         status,
         allVideos,
         setAllVideos,
         playlistID,
         setPlaylistID,
+        playOptions,
+        setPlayOptions,
       }}
     >
       {children}

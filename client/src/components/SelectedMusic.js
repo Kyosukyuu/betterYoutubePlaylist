@@ -1,27 +1,38 @@
 import { PlayingContext } from "../contexts/PlayingContext";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useContext, useEffect, useState } from "react";
-import { Box, Heading, Text, Flex, VStack, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Flex,
+  VStack,
+  Button,
+  Icon,
+} from "@chakra-ui/react";
+import { MdPlayCircleFilled } from "react-icons/md";
 import Player from "./Player";
+import ActionsBar from "./ActionsBar";
 
 export default function SelectedMusic() {
-  const { playing, allVideos, setAllVideos } = useContext(PlayingContext);
+  const { playing, setPlaying, allVideos, setAllVideos } =
+    useContext(PlayingContext);
   const [currentlyPlaying, setCurrentlyPlaying] = useState();
 
   useEffect(() => {
-    let selected;
-    if (allVideos && allVideos.items) {
-      selected = allVideos.items.filter(
-        (video) => video.contentDetails.videoId === playing.id
-      );
-      setCurrentlyPlaying(selected[0]);
-    }
-  }, [allVideos, setAllVideos, playing.id]);
+    if (allVideos && allVideos.items)
+      setCurrentlyPlaying(allVideos.items[playing.pos]);
+  }, [allVideos, setAllVideos, playing.pos]);
 
   // STYLES
   const bg = useColorModeValue("white", "gray.700");
 
-  const playNow = () => {};
+  const playNow = () => {
+    setPlaying({
+      id: allVideos.items[0].contentDetails.videoId,
+      pos: 0,
+    });
+  };
 
   return (
     <Box boxShadow="md" bg={bg} mt={6} rounded="sm">
@@ -51,7 +62,12 @@ export default function SelectedMusic() {
               </Heading>
               <Text>Enter a playlist to begin</Text>
               {playing.pos === -1 && allVideos && allVideos.items && (
-                <Button colorScheme="green" onClick={playNow} mt={2}>
+                <Button
+                  colorScheme="green"
+                  onClick={playNow}
+                  mt={4}
+                  leftIcon={<Icon as={MdPlayCircleFilled} fontSize={24} />}
+                >
                   Play Now!
                 </Button>
               )}
@@ -59,6 +75,7 @@ export default function SelectedMusic() {
           </VStack>
         )}
       </Flex>
+      <ActionsBar />
     </Box>
   );
 }

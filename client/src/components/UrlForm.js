@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/color-mode";
 import { useForm } from "react-hook-form";
-import { MdSearch, MdCancel } from "react-icons/md";
-import { useContext } from "react";
+import { MdSearch, MdCancel, MdContentPaste } from "react-icons/md";
+import { useContext, useRef } from "react";
 import { PlayingContext } from "../contexts/PlayingContext";
 
 export default function UrlForm() {
@@ -20,9 +20,12 @@ export default function UrlForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
-  const { setPlaylistID } = useContext(PlayingContext);
+
+  const { setPlaylistID, setPlaying } = useContext(PlayingContext);
+  const inputFormRef = useRef();
 
   const onSubmit = (data) => {
     setPlaylistID(parseURL(data.url));
@@ -30,13 +33,21 @@ export default function UrlForm() {
 
   const parseURL = (input) => {
     const baseURL = "https://www.youtube.com/playlist?list=";
-    if (input.includes(baseURL)) return input.split(baseURL)[1];
+    if (!input) return input;
+    else if (input.includes(baseURL)) return input.split(baseURL)[1];
     return input;
   };
 
   const onReset = () => {
     reset();
     setPlaylistID("");
+    setPlaying({ id: "", pos: -1 });
+  };
+
+  const pasteTo = async () => {
+    const pasteContent = await navigator.clipboard.readText();
+    inputFormRef.current.value = pasteContent;
+    setValue("url", pasteContent);
   };
 
   // STYLES
@@ -48,6 +59,9 @@ export default function UrlForm() {
     "gray.300",
     "rgba(255, 255, 255, 0.16)"
   );
+  const pasteBg = useColorModeValue("yellow.600", "orange.100");
+  const pasteColor = useColorModeValue("white", "gray.900");
+  const pasteColorScheme = useColorModeValue("yellow", "yellow");
 
   return (
     <Center width="100%" rounded="md" mx={1}>
@@ -65,38 +79,56 @@ export default function UrlForm() {
       >
         <FormControl id="playlistUrl">
           <FormLabel htmlFor="url">Youtube Playlist URL</FormLabel>
-          <Flex>
-            <Input
-              type="text"
-              name="url"
-              bg={inputBg}
-              color={inputColor}
-              placeholder="URL or playlist ID"
-              _placeholder={{ color: "gray.400" }}
-              {...register("url")}
-              borderRightRadius={0}
-            />
-            {errors.url && <p>Not a valid Youtube playlist URL</p>}
+          <Flex position="relative" flexDirection="row-reverse">
+            {" "}
             <Flex>
               <IconButton
                 icon={<MdSearch size={32} />}
                 colorScheme="facebook"
-                aira-label="Search Playlist"
+                aria-label="Search Playlist"
                 type="submit"
-                borderLeftRadius={0}
+                borderRadius={0}
                 title="Search"
               />
               <IconButton
-                ml={3}
-                icon={<MdCancel size={30} />}
-                colorScheme="red"
-                type="reset"
-                aira-label="Clear Fields"
-                variant="solid"
-                title="Reset"
-                onClick={onReset}
+                icon={<MdContentPaste size={28} />}
+                aria-label="Paste Playlist"
+                type="button"
+                borderLeftRadius={0}
+                title="Paste"
+                colorScheme={pasteColorScheme}
+                bg={pasteBg}
+                color={pasteColor}
+                onClick={pasteTo}
               />
             </Flex>
+            <Box width="100%" position="relative">
+              <Input
+                type="text"
+                name="url"
+                bg={inputBg}
+                color={inputColor}
+                placeholder="URL or playlist ID"
+                _placeholder={{ color: "gray.400" }}
+                {...register("url")}
+                borderRightRadius={0}
+                ref={inputFormRef}
+                onPaste={pasteTo}
+              />
+              <IconButton
+                icon={<MdCancel size={24} />}
+                colorScheme="red"
+                type="reset"
+                aria-label="Clear Fields"
+                variant="ghost"
+                title="Reset"
+                onClick={onReset}
+                position="absolute"
+                right="0"
+                zIndex={1}
+              />
+            </Box>
+            {errors.url && <p>Not a valid Youtube playlist URL</p>}
           </Flex>
 
           <FormHelperText color={labelHelper}>

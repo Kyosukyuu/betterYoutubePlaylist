@@ -7,10 +7,10 @@ export default function PlaylistItem({ vid, index }) {
   const { playing, setPlaying } = useContext(PlayingContext);
 
   const playVideo = () => {
-    setPlaying(() => ({
+    setPlaying({
       id: vid.contentDetails.videoId,
       pos: index,
-    }));
+    });
   };
 
   const isoDate = new Date(vid.contentDetails.videoPublishedAt);
