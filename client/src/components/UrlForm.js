@@ -46,7 +46,9 @@ export default function UrlForm() {
 
   const pasteTo = async () => {
     const pasteContent = await navigator.clipboard.readText();
-    inputFormRef.current.value = pasteContent;
+    if (inputFormRef.current.value !== pasteContent) {
+      inputFormRef.current.value = pasteContent;
+    }
     setValue("url", pasteContent);
   };
 
@@ -55,10 +57,9 @@ export default function UrlForm() {
   const inputColor = useColorModeValue("black", "black");
   const inputBg = useColorModeValue("white", "gray.50");
   const labelHelper = useColorModeValue("gray.600", "gray.200");
-  const borderColor = useColorModeValue(
-    "gray.300",
-    "rgba(255, 255, 255, 0.16)"
-  );
+  const borderColor = useColorModeValue("gray.300", "transparent");
+  const formBoxShadow = useColorModeValue("sm", "");
+
   const pasteBg = useColorModeValue("yellow.600", "orange.100");
   const pasteColor = useColorModeValue("white", "gray.900");
   const pasteColorScheme = useColorModeValue("yellow", "yellow");
@@ -75,7 +76,7 @@ export default function UrlForm() {
         borderWidth={2}
         rounded="md"
         bg={bg}
-        boxShadow="sm"
+        boxShadow={formBoxShadow}
       >
         <FormControl id="playlistUrl">
           <FormLabel htmlFor="url">Youtube Playlist URL</FormLabel>
