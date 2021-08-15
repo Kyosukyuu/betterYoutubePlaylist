@@ -5,7 +5,14 @@ import {
   MdSkipNext,
   MdSkipPrevious,
 } from "react-icons/md";
-import { Center, HStack, IconButton, useToast } from "@chakra-ui/react";
+import {
+  Center,
+  HStack,
+  IconButton,
+  useToast,
+  Icon,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { PlayingContext } from "../contexts/PlayingContext";
 
@@ -168,43 +175,57 @@ export default function ActionsBar() {
     }
   };
 
+  // STYLES
+  const actionButtonColorScheme = useColorModeValue("blackAlpha", "gray");
+
   return (
     <Center>
-      <HStack spacing={4} mb={4}>
+      <HStack spacing={5} mb={4}>
         <IconButton
-          icon={<MdSkipPrevious size={32} />}
+          icon={<Icon as={MdSkipPrevious} fontSize={50} />}
           aria-label="play-previous-video"
           title="Play Previous Video"
           onClick={playPrev}
           type="button"
+          colorScheme={actionButtonColorScheme}
         />
         <IconButton
-          icon={<MdRepeat size={32} />}
+          icon={<Icon as={MdRepeat} fontSize={44} />}
           aria-label="repeat-video"
           title="Repeat Video"
           onClick={repeatVideo}
           type="button"
+          colorScheme={
+            playOptions.repeat ? "telegram" : actionButtonColorScheme
+          }
         />
         <IconButton
-          icon={<MdShuffle size={32} />}
+          icon={<Icon as={MdShuffle} fontSize={42} />}
           aria-label="shuffle-playlist"
           title="Shuffle Playlist"
           onClick={shufflePlaylist}
           type="button"
+          colorScheme={
+            playOptions.shuffle ? "telegram" : actionButtonColorScheme
+          }
         />
         <IconButton
-          icon={<MdSwapCalls size={32} />}
+          icon={<Icon as={MdSwapCalls} fontSize={42} />}
           aria-label="reverse-playlist"
           title="Reverse Playlist Order"
           onClick={reversePlaylistOrder}
           type="button"
+          colorScheme={
+            playOptions.reverse ? "telegram" : actionButtonColorScheme
+          }
         />
         <IconButton
-          icon={<MdSkipNext size={32} />}
+          icon={<Icon as={MdSkipNext} fontSize={50} />}
           aria-label="play-next-video"
           title="Play Next Video"
           onClick={playNext}
           type="button"
+          colorScheme={actionButtonColorScheme}
         />
       </HStack>
     </Center>

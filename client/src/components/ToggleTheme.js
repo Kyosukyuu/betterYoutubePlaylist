@@ -17,7 +17,8 @@ export default function ToggleTheme() {
           <MdWbSunny size={26} color="white" />
         )
       }
-      aria-label="Toggle Site Theme"
+      aria-label="toggle-site-theme"
+      title="Toggle Site Theme"
       variant="solid"
       onClick={toggleThemeMode}
       bg={bg}
