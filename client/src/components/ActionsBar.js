@@ -85,7 +85,7 @@ export default function ActionsBar() {
           if (playing.id === vid.contentDetails.videoId) return i;
           return undefined;
         })
-        .filter((vid) => vid)[0];
+        .filter((vid) => typeof vid !== "undefined")[0];
 
       setPlaying({ ...playing, pos: currentVid });
     } else if (
@@ -111,7 +111,7 @@ export default function ActionsBar() {
             if (playing.id === vid.contentDetails.videoId) return i;
             return undefined;
           })
-          .filter((vid) => vid)[0];
+          .filter((vid) => typeof vid !== "undefined")[0];
 
         setPlaying({ ...playing, pos: currentVid });
       }

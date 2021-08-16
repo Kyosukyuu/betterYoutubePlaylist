@@ -51,8 +51,8 @@ export default function Player() {
     <Center m={5} boxShadow="md">
       <Skeleton
         isLoaded={status === "success" && playing.id ? true : false}
-        width="100%"
-        height="100%"
+        width="426px"
+        height="240px"
       >
         {status === "success" && (
           <Youtube videoId={playing.id} opts={opts} onEnd={playNext} />

@@ -13,6 +13,14 @@ import {
 import { MdPlayCircleFilled } from "react-icons/md";
 import Player from "./Player";
 import ActionsBar from "./ActionsBar";
+import { motion } from "framer-motion";
+
+const MotionBox = motion(Box);
+
+const variants = {
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.2 } },
+};
 
 export default function SelectedMusic() {
   const { playing, setPlaying, allVideos, setAllVideos } =
@@ -35,7 +43,15 @@ export default function SelectedMusic() {
   };
 
   return (
-    <Box boxShadow="md" bg={bg} mt={6} rounded="sm">
+    <MotionBox
+      boxShadow="md"
+      bg={bg}
+      mt={6}
+      rounded="sm"
+      variants={variants}
+      initial="initial"
+      animate="animate"
+    >
       <Flex
         alignItems={["flex-start", "flex-start", "center", "center"]}
         flexDirection={["column", "column", "row", "row"]}
@@ -70,6 +86,6 @@ export default function SelectedMusic() {
         </VStack>
       </Flex>
       <ActionsBar />
-    </Box>
+    </MotionBox>
   );
 }
