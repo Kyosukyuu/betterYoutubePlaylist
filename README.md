@@ -18,7 +18,8 @@ _NOTE: This is intended to be a proof of concept and demo rather than a fully fl
 - Animations from [Framer Motion](https://www.framer.com/motion/)
 - [React Query](https://react-query.tanstack.com/) for API handling
 - [React Hook Form](https://react-hook-form.com/) for building form logic
-- [React-Youtube package](https://www.npmjs.com/package/react-youtube) for a simple React component version of the Youtube iFrame
+- [React-Youtube package](https://www.npmjs.com/package/react-youtube) for a simple React component version of the Youtube iFrame player
+- SVG from [unDraw](https://undraw.co/)
 
 ## Running the app:
 
