@@ -43,6 +43,7 @@ export default function PlaylistItem({ vid, index }) {
       fontWeight={playing.id === vid.contentDetails.videoId && "bold"}
       verticalAlign="top"
       variants={variants}
+      layoutId={vid.contentDetails.videoId}
     >
       <Td fontStyle="italic">{index}.</Td>
       <Td>{vid.snippet.title}</Td>

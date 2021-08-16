@@ -17,6 +17,7 @@ import svg from "../assets/undraw_not_found_60pq.svg";
 
 const MotionCenter = motion(Center);
 const MotionImage = motion(Image);
+const MotionTbody = motion(Tbody);
 
 const variants = {
   initial: { opacity: 0, y: -20 },
@@ -30,7 +31,7 @@ const variants = {
   },
   exit: {
     opacity: 0,
-    y: -20,
+    y: -15,
     transition: {
       duration: 0.25,
     },
@@ -93,7 +94,7 @@ export default function Playlist() {
                     <Th isNumeric>CREATED ON</Th>
                   </Tr>
                 </Thead>
-                <Tbody>
+                <MotionTbody layout>
                   {allVideos &&
                     allVideos.items &&
                     allVideos.items.map((vid, i) => (
@@ -103,7 +104,7 @@ export default function Playlist() {
                         index={i}
                       />
                     ))}
-                </Tbody>
+                </MotionTbody>
               </Table>
             </Skeleton>
           </AnimateSharedLayout>
