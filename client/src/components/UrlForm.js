@@ -42,6 +42,7 @@ export default function UrlForm() {
     reset();
     setPlaylistID("");
     setPlaying({ id: "", pos: -1 });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const pasteTo = async () => {
